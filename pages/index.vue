@@ -69,4 +69,8 @@ export default {
 .links {
   padding-top: 15px;
 }
+
+.ftitle {
+  color: red;
+}
 </style>
