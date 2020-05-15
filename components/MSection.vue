@@ -20,11 +20,18 @@
 
     <TextInput :label="'Section'"/>
 
+    <component
+      class="p-3 mb-2 border border-primary"
+      v-for="(comp, index) in components"
+      :key="index"
+      :is="components[index]"
+    />
+
     <div class="mt-5">
       <b-dd id="c-dropdown" size="sm" text="Add Component" variant="secondary">
-        <div v-for="(comps, type) in components" :key="type">
+        <div v-for="(comps, type) in componentTypes2" :key="type">
           <b-dd-header>{{ type[0].toUpperCase() + type.slice(1) }}</b-dd-header>
-          <b-dropdown-item v-for="(comp, index) in comps" :key="index">{{ comp }}</b-dropdown-item>
+          <b-dropdown-item v-for="(comp, key) in comps" :key="key" @click="addComponent(comp)">{{ key }}</b-dropdown-item>
           <b-dropdown-divider></b-dropdown-divider>
         </div>
       </b-dd>
@@ -33,20 +40,42 @@
 </template>
 
 <script>
+// import Vue from 'vue'
 import TextInput from '~/components/TextInput.vue'
+import Doughnut from '~/components/components/Doughnut.vue'
+
 export default {
   components: {
-    TextInput
+    TextInput,
+    Doughnut
   },
   data () {
     return {
       val: '',
       tedit: true,
-      components: {
+      componentTypes: {
         charts: ['Doughnut', 'Line', 'Bar'],
         headers: ['Section Header', 'Lvl 1', 'Lvl 2'],
         photos: ['Photo', 'Photo + Caption', 'Collage']
-      }
+      },
+      componentTypes2: {
+        charts: {
+          Doughnut,
+          Line: null,
+          Bar: null
+        },
+        headers: {
+          'Section Header': null,
+          'Lvl 1': null,
+          'Lvl 2': null
+        },
+        photos: {
+          Photo: null,
+          'Photo + Caption': null,
+          Collage: null
+        }
+      },
+      components: []
     }
   },
   methods: {
@@ -55,11 +84,14 @@ export default {
         this.tedit = !this.tedit
       }
     },
-    addSection () {
-
-    },
-    getComponents () {
-
+    addComponent (comp) {
+      console.log(comp)
+      if (comp !== null) {
+        this.components.push(comp)
+      } else {
+        alert('Component does not exist... as yet')
+      }
+      console.log(this.components)
     }
   }
 }

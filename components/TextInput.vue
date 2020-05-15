@@ -53,6 +53,8 @@ export default {
         } else {
           alert('Value must be numeric')
         }
+      } else if (this.val === '' || !this.val) {
+        alert('Value cannot be empty')
       } else {
         this.switchModes()
       }
