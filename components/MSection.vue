@@ -1,6 +1,6 @@
 <template>
   <div class="mb-5">
-    <div class="d-flex ftitle">
+    <!-- <div class="d-flex ftitle">
       Section:
       <div class="ml-2 mr-2 d-flex w-25">
         <input
@@ -16,7 +16,10 @@
         <button v-if="!tedit" @click="switchModes()" class="btn btn-info btn-sm">Edit</button>
         <button v-if="tedit" @click="switchModes()" class="btn btn-info btn-sm">Save</button>
       </div>
-    </div>
+    </div> -->
+
+    <TextInput :label="'Section'"/>
+
     <div class="mt-5">
       <b-dd id="c-dropdown" size="sm" text="Add Component" variant="secondary">
         <div v-for="(comps, type) in components" :key="type">
@@ -30,7 +33,11 @@
 </template>
 
 <script>
+import TextInput from '~/components/TextInput.vue'
 export default {
+  components: {
+    TextInput
+  },
   data () {
     return {
       val: '',
@@ -44,7 +51,9 @@ export default {
   },
   methods: {
     switchModes () {
-      this.tedit = !this.tedit
+      if (this.val !== '') {
+        this.tedit = !this.tedit
+      }
     },
     addSection () {
 

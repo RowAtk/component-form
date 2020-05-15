@@ -4,11 +4,6 @@
     <h1>Make Report</h1>
     <hr>
     <div id="rform">
-      <!-- <FSection
-        v-for="(section, index) in sections"
-        :key="index"
-      /> -->
-      <!-- <h1 v-for="(section, index) in sections" :key="index">{{ section.name }}</h1> -->
       <m-section
         v-for="(section, index) in sections"
         :key="index"
